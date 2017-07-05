@@ -158,7 +158,7 @@
         document.getElementById("preload").classList.add("anim_fadeout");
         preload_on = false;
       }
-      if($("#preload").css("opacity") == 0){
+      if($("#preload").css("opacity") <= 0){
         document.getElementById("preload").style.display = "none";
       }
     }, 1000)
