@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <script>var base_url = "{{ base_url }}";</script>
+  <script data-main="{{ base_url }}/mkdocs/js/search.js" src="{{ base_url }}/mkdocs/js/require.js"></script>
+{% endblock %}
+
+{% block content %}
+  <form action="search.html" id="content_search" style="display:none;">
+    <span aria-live="polite" class="ui-helper-hidden-accessible" role="status"></span>
+    <input
+      autocomplete="off"
+      class="form-control search-query search_input ui-autocomplete-input"
+      id="mkdocs-search-query"
+      name="q"
+      placeholder="search"
+      type="search"
+    />
+  </form>
+  <!-- PENDING: This `<div>` will also be displayed when MKDocs is still
+  searching. "page not found" supposed to be appeared when the MKDocs is
+  finished searching and not found anything.
+  -->
+  <div id="mkdocs-search-results">
+    page not found
+  </div>
+{% endblock %}

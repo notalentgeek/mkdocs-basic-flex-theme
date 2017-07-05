@@ -1,0 +1,155 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{ base_url }}/css/bootstrap.css" />
+  <link rel="stylesheet" href="{{ base_url }}/css/metisMenu.css" />
+  <link rel="stylesheet" href="{{ base_url }}/css/metisMenu_mod.css" />
+  <script src="{{ base_url }}/js/jquery.js"></script>
+  <script src="{{ base_url }}/js/bootstrap.js"></script>
+  <script src="{{ base_url }}/js/metisMenu.js"></script>
+  <script>
+  </script>
+  <style>
+    @media screen and (orientation:landscape){
+      #flex_main{
+        display:flex;
+        flex-direction:row;
+        height:100%;
+      }
+      #flex_main_1{
+        display:flex;
+        flex-direction:column;
+        flex:1;
+        margin-right:5px;
+      }
+      #flex_main_2{
+        background-color:#ABA48D;
+        flex:2;
+        margin-left:5px;
+        padding:0 5% 0 5%;
+        word-wrap:break-word; /* For breaking long link. */
+      }
+    }
+    @media screen and (orientation:portrait){
+      #flex_main{
+        display:flex;
+        flex-direction:column;
+        height:100%;
+      }
+      #flex_main_1{
+        display:flex;
+        flex-direction:column;
+        flex:1;
+        margin-bottom:5px;
+      }
+      #flex_main_2{
+        background-color:#ABA48D;
+        flex:2;
+        margin-top:5px;
+        padding:0 5% 0 5%;
+        word-wrap:break-word; /* For breaking long link. */
+      }
+    }
+    #flex_main_1_toc{
+      background-color:#212529;
+      flex:1;
+    }
+    #flex_main_1_toc::-webkit-scrollbar, #flex_main_2::-webkit-scrollbar{
+      background-color:#F5F5F5;
+      border-radius:5px;
+      width:10px;
+    }
+    #flex_main_1::-webkit-scrollbar-track{ background-color:#F5F5F5; }
+    #flex_main_2::-webkit-scrollbar-track{ background-color:#ABA48D; }
+    #flex_main_1_toc::-webkit-scrollbar-track, #flex_main_2::-webkit-scrollbar-track{ border-radius:5px; }
+    #flex_main_1_toc::-webkit-scrollbar-thumb, #flex_main_2::-webkit-scrollbar-thumb{
+      background-color:#000000;
+      border-radius:5px;
+      height:20%;
+    }
+    .custom_overflow{
+      overflow-x:hidden;
+      overflow-y:auto;
+    }
+    .search_input{ text-align:center; }
+    .stretch_to_margin{
+      bottom:0;
+      display:block;
+      height:auto;
+      left:0;
+      margin:10px;
+      position:absolute;
+      right:0;
+      top:0;
+    }
+    body{ background-color:#D0D1D3; }
+    div{
+      border:1px none red;
+      border-radius:5px;
+    }
+    h1{ text-align:center; }
+    img{
+      display:block;
+      margin:0 auto;
+      max-width:600px;
+      width:100%;
+    }
+  </style>
+  <!-- These 2 lines are important for the search functions. -->
+  {% block extrahead %}
+  {% endblock %}
+</head>
+<body>
+  <div class="stretch_to_margin">
+    <div id="flex_main">
+      <div id="flex_main_1">
+        <div role="search">
+          <form action="{{ base_url }}/search.html" method="get">
+            <input
+              autocomplete="off"
+              class="form-control search_input search_query ui-autocomplete-input"
+              id="mkdocs-search-query"
+              name="q"
+              placeholder="search"
+              type="search"
+            />
+          </form>
+        </div>
+        <div class="custom_overflow" id="flex_main_1_toc">
+          <nav class="sidebar-nav">
+            <ul class="metismenu">
+              {% for nav_item in nav %}
+                {% include "nav.html" %}
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="custom_overflow" id="flex_main_2">
+        <h1 id="title_note"></h1>
+        <hr/>
+        <br/>
+        {% block content %}
+          {{ content }}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  <script>
+    $("#flex_main_1_toc").metisMenu();
+
+    var search = document.location.href.split("/").pop().split("?")[0].split(".")[0]
+    if(search == "search"){
+      document.getElementById("title_note").innerHTML = "search results";
+    }
+    else{
+      var title_note = document.location.href.split("/");
+      if (title_note[title_note.length - 1] == ""){ title_note = title_note[title_note.length - 2]; }
+      else{ title_note = title_note[title_note.length - 1]; }
+      title_note = title_note.split("-");
+      title_note.shift(); title_note.shift(); title_note.shift();
+      title_note = title_note.toString().replace(/,/g, " ");
+      document.getElementById("title_note").innerHTML = title_note;
+    }
+  </script>
+</body>
+</html>
