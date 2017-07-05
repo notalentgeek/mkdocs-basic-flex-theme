@@ -11,5 +11,5 @@ This is my personal MKDocs theme.
 ```markdown
 site_name: notes
 theme: null
-theme_dir: "no-theme-geek"
+theme_dir: "mkdocs-basic-flex-theme"
 ```
