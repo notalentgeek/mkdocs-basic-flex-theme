@@ -49,15 +49,6 @@
         word-wrap:break-word; /* For breaking long link. */
       }
     }
-    #flex_main_1_toc{
-      background-color:#212529;
-      flex:1;
-    }
-    #flex_main_1_toc::-webkit-scrollbar, #flex_main_2::-webkit-scrollbar{
-      background-color:#F5F5F5;
-      border-radius:5px;
-      width:10px;
-    }
     #flex_main_1::-webkit-scrollbar-track{ background-color:#F5F5F5; }
     #flex_main_2::-webkit-scrollbar-track{ background-color:#ABA48D; }
     #flex_main_1_toc::-webkit-scrollbar-track, #flex_main_2::-webkit-scrollbar-track{ border-radius:5px; }
@@ -66,6 +57,21 @@
       border-radius:5px;
       height:20%;
     }
+    #flex_main_1_toc{
+      background-color:#212529;
+      flex:1;
+      position:relative;
+    }
+    #flex_main_1_toc::-webkit-scrollbar, #flex_main_2::-webkit-scrollbar{
+      background-color:#F5F5F5;
+      border-radius:5px;
+      width:10px;
+    }
+    #flex_main_1_toc_content{
+      display:none;
+      opacity:0;
+    }
+    #preload{ background:#212529; }
     .custom_overflow{
       overflow-x:hidden;
       overflow-y:auto;
@@ -93,6 +99,77 @@
       max-width:600px;
       width:100%;
     }
+
+.spinner {
+  height:80px;
+  left:50%;
+  position:absolute;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:80px;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+.anim_fadeout{
+  -webkit-animation: fadeout 0.5s linear forwards;
+  animation: fadeout 0.5s linear forwards;
+}
+
+.anim_fadein{
+  -webkit-animation: fadein 0.5s linear forwards;
+  animation: fadein 0.5s linear forwards;
+}
+
+
+@-webkit-keyframes fadeout {
+  100% { opacity: 0; }
+}
+
+@keyframes fadeout {
+  100% { opacity: 0; }
+}
+
+@-webkit-keyframes fadein {
+  100% { opacity: 1; }
+}
+
+@keyframes fadein {
+  100% { opacity: 1; }
+}
+
   </style>
   <!-- These 2 lines are important for the search functions. -->
   {% block extrahead %}
@@ -115,13 +192,17 @@
           </form>
         </div>
         <div class="custom_overflow" id="flex_main_1_toc">
-          <nav class="sidebar-nav">
+          <nav class="sidebar-nav" id="flex_main_1_toc_content">
             <ul class="metismenu">
               {% for nav_item in nav %}
                 {% include "nav.html" %}
               {% endfor %}
             </ul>
           </nav>
+          <div class="spinner" id="preload">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
         </div>
       </div>
       <div class="custom_overflow" id="flex_main_2">
@@ -129,12 +210,28 @@
         <hr/>
         <br/>
         {% block content %}
-          {{ content }}
+          {{ page.content }}
         {% endblock %}
       </div>
     </div>
   </div>
   <script>
+    var preload_count = 0;
+    var preload_on = true;
+    var preload_timeout = 0;
+    window.setInterval(function(){
+      if(preload_on){ preload_count ++; }
+      if(preload_count >= preload_timeout && preload_on){
+        document.getElementById("flex_main_1_toc_content").classList.add("anim_fadein");
+        document.getElementById("flex_main_1_toc_content").style.display = "block";
+        document.getElementById("preload").classList.add("anim_fadeout");
+        preload_on = false;
+      }
+      if($("#preload").css("opacity") == 0){
+        document.getElementById("preload").style.display = "none";
+      }
+    }, 1000)
+
     $("#flex_main_1_toc").metisMenu();
 
     var search = document.location.href.split("/").pop().split("?")[0].split(".")[0]

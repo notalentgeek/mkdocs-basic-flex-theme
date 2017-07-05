@@ -12,13 +12,17 @@
     {% endraw %}
     <p style="display:none;">
       {% set title_data = { "mod":"" , "split":nav_item.title.split(" ") } %}
-      {% for i in title_data.split %}
-        {% if loop.index > 3 %}
-          {{ title_data.update({ "mod":title_data.mod + " " + i }) }}
-        {% endif %}
-      {% endfor %}
+        {% for i in title_data.split %}
+          {% if loop.index > 3 %}
+            {{ title_data.update({ "mod":title_data.mod + " " + i }) }}
+          {% endif %}
+        {% endfor %}
     </p>
-    <a href="{{ nav_item.url }}">{{ title_data.mod }}</a>
+    {% if nav_item.title not in ("Contact", "Home", "Projects") %}
+      <a href="{{ nav_item.url }}">{{ title_data.mod.lower() }}</a>
+    {% else %}
+      <a href="{{ nav_item.url }}">{{ nav_item.title.lower() }}</a>
+    {% endif %}
 
   </li>
 {% else %}
