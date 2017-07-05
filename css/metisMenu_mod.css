@@ -28,19 +28,13 @@
     color: #F8F9FA;
     text-decoration: none;
 }
-.sidebar-nav .metismenu ul a {
-    padding: 10px 15px 10px 30px;
-}
-.sidebar-nav .metismenu ul ul a {
-    padding: 10px 15px 10px 45px;
-}
+.sidebar-nav .metismenu ul a { padding: 10px 15px 10px 30px; }
+.sidebar-nav .metismenu ul ul a { padding: 10px 15px 10px 45px; }
+.sidebar-nav .metismenu ul ul ul a { padding: 10px 15px 10px 60px; }
+.sidebar-nav .metismenu ul ul ul ul a { padding: 10px 15px 10px 75px; }
+.sidebar-nav .metismenu ul ul ul ul ul a { padding: 10px 15px 10px 90px; }
 .sidebar-nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-
-
-
-
-

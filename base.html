@@ -3,6 +3,8 @@
   <link rel="stylesheet" href="{{ base_url }}/css/bootstrap.css" />
   <link rel="stylesheet" href="{{ base_url }}/css/metisMenu.css" />
   <link rel="stylesheet" href="{{ base_url }}/css/metisMenu_mod.css" />
+  <link rel="stylesheet" href="{{ base_url }}/css/animation.css" />
+  <link rel="stylesheet" href="{{ base_url }}/css/preload.css" />
   <script src="{{ base_url }}/js/jquery.js"></script>
   <script src="{{ base_url }}/js/bootstrap.js"></script>
   <script src="{{ base_url }}/js/metisMenu.js"></script>
@@ -99,77 +101,6 @@
       max-width:600px;
       width:100%;
     }
-
-.spinner {
-  height:80px;
-  left:50%;
-  position:absolute;
-  top:50%;
-  transform:translate(-50%, -50%);
-  width:80px;
-}
-
-.double-bounce1, .double-bounce2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #333;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-  animation: sk-bounce 2.0s infinite ease-in-out;
-}
-
-.double-bounce2 {
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
-}
-
-@-webkit-keyframes sk-bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes sk-bounce {
-  0%, 100% {
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 50% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
-
-.anim_fadeout{
-  -webkit-animation: fadeout 0.5s linear forwards;
-  animation: fadeout 0.5s linear forwards;
-}
-
-.anim_fadein{
-  -webkit-animation: fadein 0.5s linear forwards;
-  animation: fadein 0.5s linear forwards;
-}
-
-
-@-webkit-keyframes fadeout {
-  100% { opacity: 0; }
-}
-
-@keyframes fadeout {
-  100% { opacity: 0; }
-}
-
-@-webkit-keyframes fadein {
-  100% { opacity: 1; }
-}
-
-@keyframes fadein {
-  100% { opacity: 1; }
-}
-
   </style>
   <!-- These 2 lines are important for the search functions. -->
   {% block extrahead %}
