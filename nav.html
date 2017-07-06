@@ -18,7 +18,7 @@
           {% endif %}
         {% endfor %}
     </p>
-    {% if nav_item.title not in ("Contact", "Home", "Projects") %}
+    {% if nav_item.title not in ("Contact", "Cv", "Home") %}
       <a href="{{ nav_item.url }}">{{ title_data.mod.lower() }}</a>
     {% else %}
       <a href="{{ nav_item.url }}">{{ nav_item.title.lower() }}</a>
