@@ -170,6 +170,7 @@
     var page = document.location.href.split("/");
     page.pop();
     page = page.pop();
+    console.log(page);
     var search = document.location.href.split("/").pop().split("?")[0].split(".")[0];
     if(page == "contacts"){ document.getElementById("title_note").innerHTML = "contacts"; }
     else if(page == "cv"){ document.getElementById("title_note").innerHTML = "cv"; }
